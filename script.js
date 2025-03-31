@@ -43,6 +43,14 @@ function amountAdder() {
     logger(amount_arr); // Log the updated array
 }
 
+
+const category_arr = [];
+function cattAdder(){
+    const catt_ = cat_.value.trim();
+    category_arr.splice(0, 0, catt_);
+    logger(category_arr);
+}
+
 function renderExpenses() {
     result.innerHTML = ''; // Clear previous content
     expense_Array.forEach((value, index) => {
@@ -56,6 +64,11 @@ function renderExpenses() {
         const amount = document.createElement('span');
         amount.textContent = amount_arr[index];
 
+        const cate__ = document.createElement('span');
+        cate__.textContent = category_arr[index];
+
+
+
         const del_btn = document.createElement('button');
         del_btn.textContent = 'delete';
         del_btn.classList.add('del');
@@ -63,18 +76,22 @@ function renderExpenses() {
             deleteBtn(expense_row);
         });
 
-        expense_row.append(expense_list, amount, del_btn, date);
+        expense_row.append(expense_list, amount, cate__,  del_btn, date);
         result.append(expense_row);
     });
 }
 
 addBtn_.addEventListener('click', function () {
-    if (!amt_.value || !des_.value) {
+    if (!amt_.value && !des_.value ) {
         err_Message.innerHTML = 'Fill in the input fields';
     } else {
         err_Message.innerHTML = '';
         expenseAdder();
+        des_.value = "";
         amountAdder();
+        amt_.value = "";
+        cattAdder();
+        cat_.value = "";
         renderExpenses();
-    }
+    };
 });
