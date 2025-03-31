@@ -16,6 +16,23 @@ body{
     min-height: 50vh;
     /* max-height: 150vh; */
 }
+.header{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+}
+.header p{
+    color: #b4b4b4;
+    border: 1px solid rgb(47, 0, 255);
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+.header p:hover{
+    color: #2c2c2c;
+}
 .container h2{
     color: blue;
 }
@@ -25,7 +42,7 @@ body{
 .container input{
     border: none;
     outline: none;
-    padding: 10px;
+    padding: 15px;
     width: 80%;
     background-color: #c4c4c4;
     margin-top: 15px;
@@ -33,7 +50,7 @@ body{
 }
 .container select{
     width: 80%;
-    padding: 5px 10px;
+    padding:  10px;
     margin-top: 10px;
     background-color: #d4d4d4;
     border-radius: 10px;
@@ -71,6 +88,9 @@ body{
     border-left: 4px solid red;
     margin-top: 20px;
     border-radius: 10px;
+    align-items: center;
+    background-color: #c4c4c4;
+    padding: 8px 10px;
 }
 .del{
     background-color: red;
@@ -82,4 +102,16 @@ body{
 }
 .li{
     list-style-position: inside;
+}
+#total{
+    margin-top: 15px;
+    font-weight: 700;
+}
+#sort{
+    border: none;
+    padding: 10px;
+    background-color: green;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
 }

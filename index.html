@@ -8,26 +8,32 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
         <h2> Expense Tracker </h2>
+        <p id="summary">see expense summary</p>
+    </div>
         <input placeholder="please input expense description" type="text" id="description" required><br>
         
         <input placeholder="input expense amount" type="number" id="amount" required><br>
 
-        <select name="category" id="">
+        <select name="category" id="category">
             <option value="food">Food</option>
             <option value="travel">Travel</option>
             <option value="entertainment">Entertainment</option>
             <option value="Others">Others</option>
         </select> <br>
-        <input placeholder="input expense category" type="text" id="category" required><br>
+        <!-- <input placeholder="input expense category" type="text" id="category" required><br> -->
           <p id="error"></p>
         <div class="btn">
             <button id="s-btn">Add Expense</button>
         </div>
        
+
+        <button id="sort">Sort</button>
         <ol class="result-box">
 
         </ol>
+        <p id="total"></p>
     </div>
 
 

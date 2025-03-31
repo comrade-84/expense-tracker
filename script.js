@@ -7,9 +7,13 @@ const addBtn_ = document.getElementById('s-btn');
 const err_Message = document.getElementById('error');
 const result = document.querySelector('.result-box');
 const expense_row = document.createElement('div');
+// const summaryBtn = document.getElementById('summary');
+const totall = document.getElementById('total');
+const arrangebtn = document.getElementById('sort');
+
 
 // expense array
-const expense_Array = [];
+let expense_Array = [];
 
 // logger
 function logger(value) {
@@ -43,6 +47,17 @@ function amountAdder() {
     logger(amount_arr); // Log the updated array
 }
 
+function sorting(a, b){
+  return a - b;
+};
+function to_sort(){
+   return amount_arr.sort(sorting);
+}
+arrangebtn.addEventListener('click', function(){
+    to_sort();
+
+});
+
 
 const category_arr = [];
 function cattAdder(){
@@ -62,7 +77,7 @@ function renderExpenses() {
         expense_list.textContent = value;
 
         const amount = document.createElement('span');
-        amount.textContent = amount_arr[index];
+        amount.textContent = `${amount_arr[index]}`;
 
         const cate__ = document.createElement('span');
         cate__.textContent = category_arr[index];
@@ -93,5 +108,15 @@ addBtn_.addEventListener('click', function () {
         cattAdder();
         cat_.value = "";
         renderExpenses();
+        total();
     };
 });
+
+function total(){
+    let sum = 0 ;
+    totall.innerHTML = ""
+    for(x of amount_arr){
+       sum += x   
+     }
+     totall.innerHTML = `Total: $${parseFloat(sum)}`;
+};
