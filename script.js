@@ -26,17 +26,17 @@ function expenseAdder() {
     logger(expense_Array); // Log the updated array
 }
 
-const del_btn = document.createElement('button');
-del_btn.textContent = 'delete';
-del_btn.classList.add('del');
-del_btn.addEventListener("click", function () {
-    deleteBtn(this.parentElement);
-});
+// const del_btn = document.createElement('button');
+// del_btn.textContent = 'delete';
+// del_btn.classList.add('del');
+// del_btn.addEventListener("click", 
 
 function deleteBtn(index) {
     expense_Array.splice(index, 1);
     amount_arr.splice(index, 1);
+    category_arr.splice(index, 1);
     renderExpenses(); 
+    total();
 }
 
 const amount_arr = [];
@@ -51,10 +51,19 @@ function sorting(a, b){
   return a - b;
 };
 function to_sort(){
-   return amount_arr.sort(sorting);
+    amount_arr.sort(sorting);
+    expense_Array.sort();
 }
 arrangebtn.addEventListener('click', function(){
-    to_sort();
+    if (amount_arr.length < 0 && expense_Array.length < 0) {
+        return err_Message.innerHTML = `opps! there is nothing to sort here` ;
+    }
+    else{
+        to_sort();
+        renderExpenses();
+    }
+    
+    
 
 });
 
@@ -82,16 +91,15 @@ function renderExpenses() {
         const cate__ = document.createElement('span');
         cate__.textContent = category_arr[index];
 
-
-
+       
         const del_btn = document.createElement('button');
         del_btn.textContent = 'delete';
         del_btn.classList.add('del');
-        del_btn.addEventListener("click", function () {
-            deleteBtn(expense_row);
+        del_btn.addEventListener("click",function () {
+            deleteBtn(index);
         });
 
-        expense_row.append(expense_list, amount, cate__,  del_btn, date);
+        expense_row.append(expense_list, amount, cate__, date ,  del_btn);
         result.append(expense_row);
     });
 }
@@ -106,7 +114,6 @@ addBtn_.addEventListener('click', function () {
         amountAdder();
         amt_.value = "";
         cattAdder();
-        cat_.value = "";
         renderExpenses();
         total();
     };
@@ -116,7 +123,7 @@ function total(){
     let sum = 0 ;
     totall.innerHTML = ""
     for(x of amount_arr){
-       sum += x   
+       sum += parseFloat(x);   
      }
-     totall.innerHTML = `Total: $${parseFloat(sum)}`;
+     totall.innerHTML = `Total: #${parseFloat(sum)}`;
 };
