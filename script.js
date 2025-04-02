@@ -11,25 +11,19 @@ const expense_row = document.createElement('div');
 const totall = document.getElementById('total');
 const arrangebtn = document.getElementById('sort');
 
-
 // expense array
 let expense_Array = [];
 
 // logger
-function logger(value) {
-    return console.log(value);
-}
+function logger() {
+    return console.log();
+};
 
 function expenseAdder() {
     const desc_ = des_.value.trim();
     expense_Array.splice(0, 0, desc_);
     logger(expense_Array); // Log the updated array
 }
-
-// const del_btn = document.createElement('button');
-// del_btn.textContent = 'delete';
-// del_btn.classList.add('del');
-// del_btn.addEventListener("click", 
 
 function deleteBtn(index) {
     expense_Array.splice(index, 1);
@@ -42,9 +36,17 @@ function deleteBtn(index) {
 const amount_arr = [];
 
 function amountAdder() {
-    const amtt_ = amt_.value.trim();
-    amount_arr.splice(0, 0, amtt_);
+    const amtt_ = parseFloat(amt_.value);
+
+    if(amtt_ < 1){
+return err_Message.innerHTML = 'amount too low';
+    }
+    else{
+       err_Message.innerHTML = '';
+         amount_arr.splice(0, 0, amtt_);
     logger(amount_arr); // Log the updated array
+    }
+   
 }
 
 function sorting(a, b){
@@ -55,7 +57,7 @@ function to_sort(){
     expense_Array.sort();
 }
 arrangebtn.addEventListener('click', function(){
-    if (amount_arr.length < 0 && expense_Array.length < 0) {
+    if (amount_arr.length < 1 && expense_Array.length < 1) {
         return err_Message.innerHTML = `opps! there is nothing to sort here` ;
     }
     else{
@@ -86,10 +88,10 @@ function renderExpenses() {
         expense_list.textContent = value;
 
         const amount = document.createElement('span');
-        amount.textContent = `${amount_arr[index]}`;
+        amount.textContent = `#${amount_arr[index]}`;
 
         const cate__ = document.createElement('span');
-        cate__.textContent = category_arr[index];
+        cate__.textContent = category_arr[index] ;
 
        
         const del_btn = document.createElement('button');
@@ -98,6 +100,12 @@ function renderExpenses() {
         del_btn.addEventListener("click",function () {
             deleteBtn(index);
         });
+        // const modal_del_btn = document.createElement('button');
+        // modal_del_btn.textContent = 'Yes';
+        // modal_del_btn.classList.add('btns but')
+        // modal_del_btn.addEventListener('click', function(){
+        //     deleteBtn(index);
+        // })
 
         expense_row.append(expense_list, amount, cate__, date ,  del_btn);
         result.append(expense_row);
@@ -105,7 +113,7 @@ function renderExpenses() {
 }
 
 addBtn_.addEventListener('click', function () {
-    if (!amt_.value && !des_.value ) {
+    if (!amt_.value || !des_.value ) {
         err_Message.innerHTML = 'Fill in the input fields';
     } else {
         err_Message.innerHTML = '';
